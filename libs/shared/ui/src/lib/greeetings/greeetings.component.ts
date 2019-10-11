@@ -11,7 +11,7 @@ import { Grettings } from '@angular-workspace/shared/domain';
   styles: []
 })
 export class GreeetingsComponent implements OnInit {
-  public theGreeting: Grettings = {message: 'Hello World'};
+  public theGreeting: Grettings = {message: 'Hello world'};
   constructor() { }
 
   ngOnInit() {
