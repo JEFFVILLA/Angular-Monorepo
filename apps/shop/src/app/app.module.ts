@@ -9,7 +9,7 @@ import { UiModule } from '@angular-workspace/shared/ui'
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    RouterModule.forRoot([{ path: 'cart', loadChildren: () => import('./cart/cart.module').then(m => m.CartModule) }], { initialNavigation: 'enabled' }),
     UiModule
   ],
   providers: [],
