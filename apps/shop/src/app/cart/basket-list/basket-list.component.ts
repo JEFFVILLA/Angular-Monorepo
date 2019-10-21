@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { BasketItem } from '../model/product.inteface';
 
 @Component({
   selector: 'ab-shop-basket-list',
   templateUrl: './basket-list.component.html',
-  styles: []
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BasketListComponent implements OnInit {
-
+  @Input() public basket: Array<BasketItem> = [];
+  @Output() public removeItem = new EventEmitter<BasketItem>();
   constructor() { }
 
   ngOnInit() {
+  }
+  public getAmount(item: BasketItem){
+    return item.units * item.product.price;
   }
 
 }
