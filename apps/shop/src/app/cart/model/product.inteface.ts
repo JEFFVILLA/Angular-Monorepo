@@ -15,6 +15,7 @@ export class BasketItem implements IBasketItem {
     product: Product;
     private _units: number;
     get units() {
+      console.count('get UNIT calls');
       return this._units;
     }
     set units(value) {

@@ -28,6 +28,12 @@
     },
     "shared-ui": {
       "tags": []
+    },
+    "products": {
+      "tags": []
+    },
+    "rx-store": {
+      "tags": []
     }
   }
 }

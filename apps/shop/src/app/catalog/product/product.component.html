@@ -1,0 +1,23 @@
+<ab-products-product-template [product]="product">   
+    <main>    
+        <div abProductsOutOfStock>       
+            {{ product.brand }} - {{ product.category }}     
+        </div> 
+        <div>      
+                <div>    
+                    ${{ product.price | exRate | number:'1.0-0'}}     
+                    {{ product.price | exRate:'GBP' | async | number:'1.0-0'}} £  
+                </div>
+            Price: {{ product.price }}           
+        </div>
+        
+        <div [abProductsOutOfStock]="product.stock">
+            Stock: {{product.stock}}
+        </div>
+    </main>  
+    <nav class="actions">     
+         <button (clic)="buy.next()"           
+          style="background-color:coral; padding: 5px">
+          <strong>Buy me!</strong></button>  
+    </nav>
+</ab-products-product-template>

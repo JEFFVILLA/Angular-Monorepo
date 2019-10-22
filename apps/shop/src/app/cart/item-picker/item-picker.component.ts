@@ -27,6 +27,7 @@ export class ItemPickerComponent implements OnInit {
 
   public onAddItem() {
     const basketItem = new BasketItem();
+    console.count('get AMOUNT units calls');
     basketItem.product = this.pickerFormGroup.value.product;
     basketItem.units = this.pickerFormGroup.value.units;
     this.addItem.next(basketItem);
