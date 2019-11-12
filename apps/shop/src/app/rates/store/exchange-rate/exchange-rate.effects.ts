@@ -1,23 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { concatMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
-
+import { of } from 'rxjs';
+import { catchError, concatMap, map } from 'rxjs/operators';
 import * as ExchangeRateActions from './exchange-rate.actions';
-
 
 @Injectable()
 export class ExchangeRateEffects {
+  public loadExchangeRates$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExchangeRateActions.loadExchangeRates),
+      concatMap(() =>
+        this.http.get<any>('https://api.exchangeratesapi.io/latest').pipe(
+          map(res =>
+            ExchangeRateActions.loadExchangeRatesSuccess({ rates: res.rates })
+          ),
+          catchError(err =>
+            of(ExchangeRateActions.loadExchangeRatesError({ rates: err }))
+          )
+        )
+      )
+    )
+  );
 
-
-  loadExchangeRates$ = createEffect(() => this.actions$.pipe(
-    ofType(ExchangeRateActions.loadExchangeRates),
-    /** An EMPTY observable only emits completion. Replace with your own observable API request */
-    concatMap(() => EMPTY)
-  ));
-
-
-  constructor(private actions$: Actions) {}
-
+  constructor(private actions$: Actions, private http: HttpClient) {}
 }
