@@ -7,6 +7,7 @@
     "nx": "nx",
     "start:shop": "ng serve shop --port=4201 -o",
     "build:shop": "ng build shop --prod",
+    "start:shop:pwa": "npm run build:shop && angular-http-server --open -p 8080 --path ./dist/apps/shop",
     "test:shop": "ng test shop",
     "start:warehouse": "ng serve warehouse --port=4202 -o",
     "build:warehouse": "ng build warehouse --prod",
@@ -31,7 +32,13 @@
     "update:check": "ng update",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "start:ssr": "npm run build:ssr && npm run server:ssr ",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run shop:server:production --bundleDependecies all",
+    "i18n:warehouse": "ng xi18n warehouse --output-path src/locale"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +59,7 @@
     "@ngrx/entity": "8.3.0",
     "@ngrx/router-store": "8.3.0",
     "@ngrx/store": "8.3.0",
+    "angular-http-server": "^1.9.0",
     "core-js": "^2.5.4",
     "reflect-metadata": "^0.1.12",
     "rxjs": "~6.4.0",
@@ -79,11 +87,15 @@
     "dotenv": "6.2.0",
     "eslint": "6.1.0",
     "jest": "24.1.0",
-    "jest-preset-angular": "7.0.0",
+    "jest-preset-angular": "^8.0.0",
+    "ngx-pwa-icons": "^0.1.2",
     "prettier": "1.18.2",
     "ts-jest": "24.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.4.5"
+  },
+  "engines": {
+    "npm": "YARN NO LONGER USED - use npm instead."
   }
 }
